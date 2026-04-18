@@ -175,8 +175,6 @@ function ButtonLink({ href, onClick, children, variant = 'primary' }) {
 }
 
 export default function App() {
-  const [formStatus, setFormStatus] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const scrollToSection = (id) => (event) => {
     event.preventDefault()
@@ -187,8 +185,6 @@ export default function App() {
     event.preventDefault()
     window.open(url, '_blank', 'noopener,noreferrer')
   }
-
-  const handleContactSubmit = async (event) => {
     event.preventDefault()
     setIsSubmitting(true)
     setFormStatus('')
@@ -409,9 +405,6 @@ export default function App() {
                 ))}
               </div>
             </div>
-
-<input type="hidden" name="_subject" value="r2 development iletişim formu" />
-<input type="hidden" name="_captcha" value="false" />
             
             <div className="quality-grid">
               {qualityPoints.map((item) => (
@@ -436,7 +429,8 @@ export default function App() {
               <form
   action="https://formspree.io/f/xjgjyzgj"
   method="POST"
-  className="..."
+  className="rounded-[1.6rem] border border-white/10 bg-black/45 p-5 sm:rounded-[2rem] sm:p-8 lg:p-10"
+>
 >
                 <div className="contact-head">
                   <p className="contact-kicker">r2 development</p>
@@ -449,6 +443,11 @@ export default function App() {
                 <div className="form-two-col">
                   <label>
                     <span>Adınız</span>
+                    
+                    <input type="hidden" name="_subject" value="r2 development iletişim formu" />
+                    
+                    <input type="hidden" name="_captcha" value="false" />
+                    
                     <input type="text" name="name" required placeholder="Adınızı yazın" />
                   </label>
                   <label>
@@ -462,16 +461,16 @@ export default function App() {
                   <textarea rows="5" name="message" required placeholder="Projenizden kısaca bahsedin" />
                 </label>
 
-                <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} disabled={isSubmitting} className="submit-button">
-                  {isSubmitting ? 'GÖNDERİLİYOR' : 'GÖNDER'}
-                  <ArrowRight className="icon-sm" />
+                <motion.button
+                type="submit"
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="mt-8 flex w-full items-center justify-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-black tracking-[0.18em] text-black transition hover:bg-[#e9e9ff] sm:px-8 sm:py-5 sm:tracking-[0.25em]"
+                >
+                  GÖNDER
+                  <ArrowRight className="h-4 w-4" />
                 </motion.button>
 
-                {formStatus && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="form-status">
-                    {formStatus}
-                  </motion.div>
-                )}
               </form>
 
               <div className="social-card">
