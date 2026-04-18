@@ -136,16 +136,18 @@ textarea {
   flex: 0 0 auto;
   display: grid;
   place-items: center;
+  overflow: hidden;
   border-radius: 1rem;
   border: 1px solid rgba(54, 56, 119, 0.7);
   background: rgba(54, 56, 119, 0.2);
   box-shadow: 0 0 35px rgba(54, 56, 119, 0.45);
 }
 
-.brand-badge span {
-  color: var(--primary-lighter);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+.brand-badge img {
+  width: 70%;
+  height: 70%;
+  display: block;
+  object-fit: contain;
 }
 
 .brand-text {
@@ -700,6 +702,7 @@ textarea {
   position: relative;
   display: grid;
   gap: 1rem;
+  align-items: start;
 }
 
 .contact-form-card {
@@ -723,6 +726,10 @@ textarea {
   display: grid;
   gap: 1.25rem;
   margin-top: 2rem;
+}
+
+.form-two-col label {
+  min-width: 0;
 }
 
 .contact-form-card label {
@@ -1030,7 +1037,6 @@ textarea {
   }
 
   .hero-grid,
-  .contact-grid,
   .about-grid {
     grid-template-columns: 1.1fr 0.9fr;
   }
