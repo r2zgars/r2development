@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -13,7 +12,6 @@ import {
   Zap,
 } from 'lucide-react'
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgjyzgj'
 const INSTAGRAM_URL = 'https://www.instagram.com/r2developmentt/'
 const WHATSAPP_URL = 'https://wa.me/905317714127'
 
@@ -132,6 +130,63 @@ const staggerContainer = {
   },
 }
 
+const formCardStyle = {
+  border: '1px solid rgba(255,255,255,0.1)',
+  background: 'rgba(0,0,0,0.45)',
+  borderRadius: '1.6rem',
+  padding: '1.5rem',
+}
+
+const labelStyle = {
+  display: 'block',
+}
+
+const labelTextStyle = {
+  display: 'block',
+  color: 'rgba(255,255,255,0.72)',
+  fontSize: '0.95rem',
+  marginBottom: '0.75rem',
+}
+
+const inputStyle = {
+  width: '100%',
+  background: 'transparent',
+  border: 'none',
+  borderBottom: '1px solid rgba(54,56,119,0.6)',
+  color: '#ffffff',
+  padding: '0 0 0.9rem 0',
+  fontSize: '1rem',
+  outline: 'none',
+  boxSizing: 'border-box',
+  borderRadius: 0,
+  appearance: 'none',
+  WebkitAppearance: 'none',
+}
+
+const textareaStyle = {
+  ...inputStyle,
+  resize: 'none',
+  minHeight: '140px',
+}
+
+const submitButtonStyle = {
+  marginTop: '2rem',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '0.75rem',
+  borderRadius: '1rem',
+  background: '#ffffff',
+  color: '#000000',
+  padding: '1rem 1.5rem',
+  fontSize: '0.95rem',
+  fontWeight: 900,
+  letterSpacing: '0.18em',
+  border: 'none',
+  cursor: 'pointer',
+}
+
 function InstagramIcon({ className }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -175,7 +230,6 @@ function ButtonLink({ href, onClick, children, variant = 'primary' }) {
 }
 
 export default function App() {
-
   const scrollToSection = (id) => (event) => {
     event.preventDefault()
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -184,32 +238,6 @@ export default function App() {
   const openExternalLink = (url) => (event) => {
     event.preventDefault()
     window.open(url, '_blank', 'noopener,noreferrer')
-  }
-    event.preventDefault()
-    setIsSubmitting(true)
-    setFormStatus('')
-
-    const formData = new FormData(event.currentTarget)
-    formData.append('_subject', 'r2 development iletişim formu')
-
-    try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        body: formData,
-        headers: { Accept: 'application/json' },
-      })
-
-      if (response.ok) {
-        event.currentTarget.reset()
-        setFormStatus('Mesajın başarıyla gönderildi. En kısa sürede dönüş yapılacak.')
-      } else {
-        setFormStatus('Mesaj gönderilemedi. Lütfen daha sonra tekrar dene veya Instagram/WhatsApp üzerinden ulaş.')
-      }
-    } catch {
-      setFormStatus('Bağlantı hatası oluştu. Lütfen daha sonra tekrar dene.')
-    } finally {
-      setIsSubmitting(false)
-    }
   }
 
   return (
@@ -224,7 +252,11 @@ export default function App() {
         <div className="container header-row">
           <a href="#home" onClick={scrollToSection('home')} className="brand-wrap">
             <motion.div whileHover={{ rotate: 8, scale: 1.08 }} transition={{ type: 'spring', stiffness: 260, damping: 16 }} className="brand-badge">
-              <span>r2</span>
+              <img
+                src="/logo.png"
+                alt="r2 development logo"
+                style={{ width: '70%', height: '70%', objectFit: 'contain' }}
+              />
             </motion.div>
             <div className="brand-text">
               <p>r2zgar</p>
@@ -405,7 +437,7 @@ export default function App() {
                 ))}
               </div>
             </div>
-            
+
             <div className="quality-grid">
               {qualityPoints.map((item) => (
                 <motion.div key={item.title} whileHover={{ y: -5, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }} className="quality-card">
@@ -426,12 +458,10 @@ export default function App() {
             <motion.div className="contact-blob" animate={{ scale: [1, 1.16, 1], opacity: [0.35, 0.75, 0.35] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
 
             <div className="contact-grid">
-              <form
-  action="https://formspree.io/f/xjgjyzgj"
-  method="POST"
-  className="rounded-[1.6rem] border border-white/10 bg-black/45 p-5 sm:rounded-[2rem] sm:p-8 lg:p-10"
->
->
+              <form action="https://formspree.io/f/xjgjyzgj" method="POST" style={formCardStyle}>
+                <input type="hidden" name="_subject" value="r2 development iletişim formu" />
+                <input type="hidden" name="_captcha" value="false" />
+
                 <div className="contact-head">
                   <p className="contact-kicker">r2 development</p>
                   <h2>İletişime Geç</h2>
@@ -441,54 +471,26 @@ export default function App() {
                 </div>
 
                 <div className="form-two-col">
-                  <label>
-                    <span>Adınız</span>
-                    
-                    <input type="hidden" name="_subject" value="r2 development iletişim formu" />
-                    
-                    <input type="hidden" name="_captcha" value="false" />
-                    
-                    <input
-                     type="text"
-                     name="name"
-                     required
-                     className="mt-3 w-full border-0 border-b border-[#363877]/60 bg-transparent px-0 py-3 text-base text-white outline-none transition placeholder:text-white/25 focus:border-[#bfc2ff]"
-                     placeholder="Adınızı yazın"
-                   />
+                  <label style={labelStyle}>
+                    <span style={labelTextStyle}>Adınız</span>
+                    <input type="text" name="name" required placeholder="Adınızı yazın" style={inputStyle} />
                   </label>
-                  <label>
-                    <span>E-posta</span>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      className="mt-3 w-full border-0 border-b border-[#363877]/60 bg-transparent px-0 py-3 text-base text-white outline-none transition placeholder:text-white/25 focus:border-[#bfc2ff]"
-                      placeholder="E-posta adresiniz"
-                    />
+
+                  <label style={labelStyle}>
+                    <span style={labelTextStyle}>E-posta</span>
+                    <input type="email" name="email" required placeholder="E-posta adresiniz" style={inputStyle} />
                   </label>
                 </div>
 
-                <label className="textarea-label">
-                  <span>Mesajınız</span>
-                  <textarea
-                    rows={5}
-                    name="message"
-                    required
-                    className="mt-3 w-full resize-none border-0 border-b border-[#363877]/60 bg-transparent px-0 py-3 text-base text-white outline-none transition placeholder:text-white/25 focus:border-[#bfc2ff]"
-                    placeholder="Projenizden kısaca bahsedin"
-                  />
+                <label className="textarea-label" style={{ ...labelStyle, marginTop: '2rem' }}>
+                  <span style={labelTextStyle}>Mesajınız</span>
+                  <textarea rows={5} name="message" required placeholder="Projenizden kısaca bahsedin" style={textareaStyle} />
                 </label>
 
-                <motion.button
-                type="submit"
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="mt-8 flex w-full items-center justify-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-black tracking-[0.18em] text-black transition hover:bg-[#e9e9ff] sm:px-8 sm:py-5 sm:tracking-[0.25em]"
-                >
+                <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} style={submitButtonStyle}>
                   GÖNDER
                   <ArrowRight className="h-4 w-4" />
                 </motion.button>
-
               </form>
 
               <div className="social-card">
