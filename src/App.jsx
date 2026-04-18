@@ -410,6 +410,9 @@ export default function App() {
               </div>
             </div>
 
+<input type="hidden" name="_subject" value="r2 development iletişim formu" />
+<input type="hidden" name="_captcha" value="false" />
+            
             <div className="quality-grid">
               {qualityPoints.map((item) => (
                 <motion.div key={item.title} whileHover={{ y: -5, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }} className="quality-card">
@@ -430,7 +433,11 @@ export default function App() {
             <motion.div className="contact-blob" animate={{ scale: [1, 1.16, 1], opacity: [0.35, 0.75, 0.35] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
 
             <div className="contact-grid">
-              <form onSubmit={handleContactSubmit} className="contact-form-card">
+              <form
+  action="https://formspree.io/f/xjgjyzgj"
+  method="POST"
+  className="..."
+>
                 <div className="contact-head">
                   <p className="contact-kicker">r2 development</p>
                   <h2>İletişime Geç</h2>
