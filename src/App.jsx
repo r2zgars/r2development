@@ -448,17 +448,35 @@ export default function App() {
                     
                     <input type="hidden" name="_captcha" value="false" />
                     
-                    <input type="text" name="name" required placeholder="Adınızı yazın" />
+                    <input
+                     type="text"
+                     name="name"
+                     required
+                     className="mt-3 w-full border-0 border-b border-[#363877]/60 bg-transparent px-0 py-3 text-base text-white outline-none transition placeholder:text-white/25 focus:border-[#bfc2ff]"
+                     placeholder="Adınızı yazın"
+                   />
                   </label>
                   <label>
                     <span>E-posta</span>
-                    <input type="email" name="email" required placeholder="E-posta adresiniz" />
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      className="mt-3 w-full border-0 border-b border-[#363877]/60 bg-transparent px-0 py-3 text-base text-white outline-none transition placeholder:text-white/25 focus:border-[#bfc2ff]"
+                      placeholder="E-posta adresiniz"
+                    />
                   </label>
                 </div>
 
                 <label className="textarea-label">
                   <span>Mesajınız</span>
-                  <textarea rows="5" name="message" required placeholder="Projenizden kısaca bahsedin" />
+                  <textarea
+                    rows={5}
+                    name="message"
+                    required
+                    className="mt-3 w-full resize-none border-0 border-b border-[#363877]/60 bg-transparent px-0 py-3 text-base text-white outline-none transition placeholder:text-white/25 focus:border-[#bfc2ff]"
+                    placeholder="Projenizden kısaca bahsedin"
+                  />
                 </label>
 
                 <motion.button
