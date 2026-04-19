@@ -1,31 +1,3 @@
-.submit-button {
-  margin-top: 2rem;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  border: 0;
-  border-radius: 0.9rem;
-  background: white;
-  padding: 1rem 1.25rem;
-  color: black;
-  font-size: 0.9rem;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  cursor: pointer;
-  transition: background-color 0.25s ease, opacity 0.25s ease;
-}
-
-.submit-button:hover {
-  background: #e9e9ff;
-}
-
-.submit-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
 :root {
   --bg: #000000;
   --surface: rgba(12, 12, 18, 0.78);
@@ -176,18 +148,13 @@ img {
   border: 1px solid rgba(54, 56, 119, 0.7);
   background: rgba(54, 56, 119, 0.2);
   box-shadow: 0 0 35px rgba(54, 56, 119, 0.45);
+  padding: 0.12rem;
 }
 
-.brand-badge span {
-  color: var(--primary-lighter);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-}
-
-.brand-badge img {
+.brand-logo {
   display: block;
-  width: 70%;
-  height: 70%;
+  width: 92%;
+  height: 92%;
   object-fit: contain;
 }
 
@@ -746,6 +713,13 @@ img {
   align-items: start;
 }
 
+.contact-form-card {
+  border-radius: 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.45);
+  padding: 1.25rem;
+}
+
 .contact-head {
   text-align: center;
 }
@@ -762,9 +736,95 @@ img {
   margin-top: 2rem;
 }
 
+.contact-form-card label {
+  display: block;
+}
+
+.contact-form-card label span {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.94rem;
+  margin-bottom: 0.75rem;
+}
+
+.contact-form-card input,
+.contact-form-card textarea {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(54, 56, 119, 0.6);
+  padding: 0 0 0.95rem;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.25s ease;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.contact-form-card input::placeholder,
+.contact-form-card textarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.contact-form-card input:focus,
+.contact-form-card textarea:focus {
+  border-color: var(--primary-light);
+}
+
 .textarea-label {
   margin-top: 1.75rem;
   display: block;
+}
+
+.contact-form-card textarea {
+  resize: none;
+  min-height: 140px;
+}
+
+.submit-button {
+  margin-top: 2rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 0;
+  border-radius: 0.9rem;
+  background: white;
+  padding: 1rem 1.25rem;
+  color: black;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  transition: background-color 0.25s ease, opacity 0.25s ease;
+}
+
+.submit-button:hover {
+  background: #e9e9ff;
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-status {
+  margin-top: 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(54, 56, 119, 0.55);
+  background: rgba(54, 56, 119, 0.15);
+  padding: 1rem 1.15rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.success-card-actions {
+  margin-top: 2rem;
 }
 
 .social-card {
@@ -858,8 +918,8 @@ img {
   }
 
   .brand-badge {
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 3rem;
+    height: 3rem;
   }
 
   .brand-text p {
@@ -929,6 +989,7 @@ img {
   .quality-card,
   .about-main-card,
   .process-card,
+  .contact-form-card,
   .social-card {
     padding: 1.75rem;
   }
@@ -956,6 +1017,7 @@ img {
     padding: 2rem;
   }
 
+  .contact-form-card,
   .social-card {
     border-radius: 2rem;
   }
@@ -963,6 +1025,11 @@ img {
   .form-two-col {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
+  }
+
+  .submit-button {
+    padding: 1.25rem 1.5rem;
+    letter-spacing: 0.25em;
   }
 }
 
@@ -1042,17 +1109,4 @@ img {
   .expertise-strip {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
-}
-
-
-.form-status {
-  margin-top: 1rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(54, 56, 119, 0.55);
-  background: rgba(54, 56, 119, 0.15);
-  padding: 1rem 1.15rem;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.92rem;
-  line-height: 1.7;
 }
