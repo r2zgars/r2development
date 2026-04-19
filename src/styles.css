@@ -138,16 +138,17 @@ img {
 }
 
 .brand-badge {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  overflow: hidden;
   border-radius: 1rem;
   border: 1px solid rgba(54, 56, 119, 0.7);
   background: rgba(54, 56, 119, 0.2);
   box-shadow: 0 0 35px rgba(54, 56, 119, 0.45);
+  overflow: hidden;
+  padding: 0.12rem;
 }
 
 .brand-badge span {
@@ -817,10 +818,10 @@ img {
   font-size: 0.95rem;
 }
 
-@media (min-width: 420px) {
-  .highlight-grid,
-  .expertise-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (min-width: 640px) {
+  .brand-badge {
+    width: 3rem;
+    height: 3rem;
   }
 }
 
