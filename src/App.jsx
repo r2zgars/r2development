@@ -255,7 +255,7 @@ export default function App() {
               <img
                 src="/logo.png"
                 alt="r2 development logo"
-                style={{ width: '70%', height: '70%', objectFit: 'contain' }}
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               />
             </motion.div>
             <div className="brand-text">
