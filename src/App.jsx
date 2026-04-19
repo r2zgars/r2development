@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -13,7 +12,6 @@ import {
   Zap,
 } from 'lucide-react'
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjgjyzgj'
 const INSTAGRAM_URL = 'https://www.instagram.com/r2developmentt/'
 const WHATSAPP_URL = 'https://wa.me/905317714127'
 
@@ -132,6 +130,63 @@ const staggerContainer = {
   },
 }
 
+const formCardStyle = {
+  border: '1px solid rgba(255,255,255,0.1)',
+  background: 'rgba(0,0,0,0.45)',
+  borderRadius: '1.6rem',
+  padding: '1.5rem',
+}
+
+const labelStyle = {
+  display: 'block',
+}
+
+const labelTextStyle = {
+  display: 'block',
+  color: 'rgba(255,255,255,0.72)',
+  fontSize: '0.95rem',
+  marginBottom: '0.75rem',
+}
+
+const inputStyle = {
+  width: '100%',
+  background: 'transparent',
+  border: 'none',
+  borderBottom: '1px solid rgba(54,56,119,0.6)',
+  color: '#ffffff',
+  padding: '0 0 0.9rem 0',
+  fontSize: '1rem',
+  outline: 'none',
+  boxSizing: 'border-box',
+  borderRadius: 0,
+  appearance: 'none',
+  WebkitAppearance: 'none',
+}
+
+const textareaStyle = {
+  ...inputStyle,
+  resize: 'none',
+  minHeight: '140px',
+}
+
+const submitButtonStyle = {
+  marginTop: '2rem',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '0.75rem',
+  borderRadius: '1rem',
+  background: '#ffffff',
+  color: '#000000',
+  padding: '1rem 1.5rem',
+  fontSize: '0.95rem',
+  fontWeight: 900,
+  letterSpacing: '0.18em',
+  border: 'none',
+  cursor: 'pointer',
+}
+
 function InstagramIcon({ className }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -175,12 +230,6 @@ function ButtonLink({ href, onClick, children, variant = 'primary' }) {
 }
 
 export default function App() {
-  const [submitState, setSubmitState] = useState({
-    submitting: false,
-    succeeded: false,
-    error: '',
-  })
-
   const scrollToSection = (id) => (event) => {
     event.preventDefault()
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -191,79 +240,23 @@ export default function App() {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  const handleContactSubmit = async (event) => {
-    event.preventDefault()
-
-    if (submitState.submitting) return
-
-    setSubmitState({
-      submitting: true,
-      succeeded: false,
-      error: '',
-    })
-
-    const formData = new FormData(event.currentTarget)
-    formData.append('_subject', 'r2 development iletişim formu')
-    formData.append('_captcha', 'false')
-
-    try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          Accept: 'application/json',
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error('Form submission failed')
-      }
-
-      event.currentTarget.reset()
-      setSubmitState({
-        submitting: false,
-        succeeded: true,
-        error: '',
-      })
-    } catch (error) {
-      setSubmitState({
-        submitting: false,
-        succeeded: false,
-        error: 'Mesaj gönderilemedi. Lütfen tekrar dene veya Instagram/WhatsApp üzerinden ulaş.',
-      })
-    }
-  }
-
   return (
     <div className="site-shell">
       <div className="site-background">
         <div className="site-gradient" />
-        <motion.div
-          className="blob blob-left"
-          animate={{ y: [0, 30, 0], x: [0, 20, 0], scale: [1, 1.12, 1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="blob blob-right"
-          animate={{ y: [0, -25, 0], x: [0, -15, 0], scale: [1, 1.08, 1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-        />
+        <motion.div className="blob blob-left" animate={{ y: [0, 30, 0], x: [0, 20, 0], scale: [1, 1.12, 1] }} transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }} />
+        <motion.div className="blob blob-right" animate={{ y: [0, -25, 0], x: [0, -15, 0], scale: [1, 1.08, 1] }} transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }} />
       </div>
 
-      <motion.header
-        initial={{ opacity: 0, y: -18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="site-header"
-      >
+      <motion.header initial={{ opacity: 0, y: -18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: 'easeOut' }} className="site-header">
         <div className="container header-row">
           <a href="#home" onClick={scrollToSection('home')} className="brand-wrap">
-            <motion.div
-              whileHover={{ rotate: 8, scale: 1.08 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 16 }}
-              className="brand-badge"
-            >
-              <img src="/logo.png" alt="r2 development logo" className="brand-logo" />
+            <motion.div whileHover={{ rotate: 8, scale: 1.08 }} transition={{ type: 'spring', stiffness: 260, damping: 16 }} className="brand-badge">
+              <img
+                src="/logo.png"
+                alt="r2 development logo"
+                style={{ width: '70%', height: '70%', objectFit: 'contain' }}
+              />
             </motion.div>
             <div className="brand-text">
               <p>r2zgar</p>
@@ -286,12 +279,7 @@ export default function App() {
 
         <nav className="mobile-nav container">
           {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={scrollToSection(item.id)}
-              className="mobile-nav-pill"
-            >
+            <a key={item.id} href={`#${item.id}`} onClick={scrollToSection(item.id)} className="mobile-nav-pill">
               {item.label}
             </a>
           ))}
@@ -302,57 +290,28 @@ export default function App() {
         <section id="home" className="section home-section container">
           <div className="hero-grid">
             <div>
-              <motion.h2
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.05 }}
-                className="hero-title"
-              >
+              <motion.h2 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.05 }} className="hero-title">
                 Markanı dijitalde
                 <span>güçlü ve premium göster.</span>
               </motion.h2>
 
-              <motion.p
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.12 }}
-                className="hero-description"
-              >
+              <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.12 }} className="hero-description">
                 r2 development olarak işletmeler ve kişisel markalar için modern web siteleri,
                 işletmeye özel QR sistemleri ve yüksek güven veren dijital deneyimler üretiyoruz.
               </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.18 }}
-                className="hero-actions"
-              >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.18 }} className="hero-actions">
                 <ButtonLink href="#contact" onClick={scrollToSection('contact')}>
                   Projeni Başlat <ArrowRight className="icon-sm" />
                 </ButtonLink>
-                <ButtonLink
-                  href="#services"
-                  onClick={scrollToSection('services')}
-                  variant="secondary"
-                >
+                <ButtonLink href="#services" onClick={scrollToSection('services')} variant="secondary">
                   Hizmetleri İncele
                 </ButtonLink>
               </motion.div>
 
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                animate="visible"
-                className="highlight-grid"
-              >
+              <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="highlight-grid">
                 {highlights.map((item) => (
-                  <motion.div
-                    key={item}
-                    variants={fadeUp}
-                    whileHover={{ x: 6, backgroundColor: 'rgba(54,56,119,0.18)' }}
-                    className="highlight-card"
-                  >
+                  <motion.div key={item} variants={fadeUp} whileHover={{ x: 6, backgroundColor: 'rgba(54,56,119,0.18)' }} className="highlight-card">
                     <CheckCircle2 className="icon-sm icon-primary" />
                     {item}
                   </motion.div>
@@ -360,23 +319,10 @@ export default function App() {
               </motion.div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15 }}
-              className="preview-wrap"
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.15 }} className="preview-wrap">
               <div className="preview-glow" />
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ type: 'spring', stiffness: 170, damping: 18 }}
-                className="preview-panel"
-              >
-                <motion.div
-                  className="scan-line"
-                  animate={{ x: ['-100%', '100%'] }}
-                  transition={{ duration: 2.8, repeat: Infinity, ease: 'linear' }}
-                />
+              <motion.div whileHover={{ y: -6 }} transition={{ type: 'spring', stiffness: 170, damping: 18 }} className="preview-panel">
+                <motion.div className="scan-line" animate={{ x: ['-100%', '100%'] }} transition={{ duration: 2.8, repeat: Infinity, ease: 'linear' }} />
                 <div className="preview-inner">
                   <div className="window-dots">
                     <span />
@@ -391,17 +337,12 @@ export default function App() {
                           <p>r2 development</p>
                           <h3>Dijital Çözümler</h3>
                         </div>
-                        <motion.div
-                          animate={{ rotate: [0, 8, -8, 0], scale: [1, 1.08, 1] }}
-                          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                          className="feature-icon-wrap"
-                        >
+                        <motion.div animate={{ rotate: [0, 8, -8, 0], scale: [1, 1.08, 1] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} className="feature-icon-wrap">
                           <Zap className="icon-md icon-primary" />
                         </motion.div>
                       </div>
                       <p className="feature-copy">
-                        Web sitesi, marka görünümü ve akıllı QR sistemlerini tek çatı altında
-                        topluyoruz.
+                        Web sitesi, marka görünümü ve akıllı QR sistemlerini tek çatı altında topluyoruz.
                       </p>
                     </div>
 
@@ -423,12 +364,7 @@ export default function App() {
             </motion.div>
           </div>
 
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="expertise-strip"
-          >
+          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="expertise-strip">
             {expertise.map((item) => (
               <motion.div key={item} variants={fadeUp} className="expertise-pill">
                 {item}
@@ -438,44 +374,20 @@ export default function App() {
         </section>
 
         <section id="services" className="section container">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7 }}
-            className="section-heading"
-          >
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7 }} className="section-heading">
             <p className="section-kicker">Hizmetler</p>
             <h2>İhtiyacına uygun dijital çözümler</h2>
             <p>
-              Tasarım, geliştirme ve kullanıcı deneyimini birleştirerek markana özel güçlü bir
-              vitrin kuruyoruz.
+              Tasarım, geliştirme ve kullanıcı deneyimini birleştirerek markana özel güçlü bir vitrin kuruyoruz.
             </p>
           </motion.div>
 
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            className="services-grid"
-          >
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} className="services-grid">
             {services.map((service) => {
               const Icon = service.icon
               return (
-                <motion.div
-                  key={service.title}
-                  variants={fadeUp}
-                  whileHover={{ y: -6, scale: 1.01 }}
-                  transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-                  className="service-card"
-                >
-                  <motion.div
-                    whileHover={{ rotate: 8, scale: 1.08 }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 16 }}
-                    className="service-icon-wrap"
-                  >
+                <motion.div key={service.title} variants={fadeUp} whileHover={{ y: -6, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }} className="service-card">
+                  <motion.div whileHover={{ rotate: 8, scale: 1.08 }} transition={{ type: 'spring', stiffness: 260, damping: 16 }} className="service-icon-wrap">
                     <Icon className="icon-md icon-primary" />
                   </motion.div>
                   <h3>{service.title}</h3>
@@ -487,14 +399,7 @@ export default function App() {
         </section>
 
         <section id="process" className="section container">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.18 }}
-            transition={{ duration: 0.7 }}
-            className="process-shell"
-          >
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.18 }} transition={{ duration: 0.7 }} className="process-shell">
             <div className="section-heading compact-heading">
               <p className="section-kicker">Süreç</p>
               <h2>Temiz iletişim, net sonuç.</h2>
@@ -502,12 +407,7 @@ export default function App() {
 
             <div className="process-grid">
               {processSteps.map((item) => (
-                <motion.div
-                  key={item.step}
-                  whileHover={{ y: -5, scale: 1.01 }}
-                  transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-                  className="process-card"
-                >
+                <motion.div key={item.step} whileHover={{ y: -5, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }} className="process-card">
                   <div className="process-step">{item.step}</div>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
@@ -518,33 +418,19 @@ export default function App() {
         </section>
 
         <section id="about" className="section container">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7 }}
-          >
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7 }}>
             <div className="about-grid">
               <div className="about-card about-main-card">
                 <p className="section-kicker">Hakkımızda</p>
                 <h2>Dijital görünümünü sıradanlıktan çıkarıyoruz.</h2>
                 <p>
-                  r2 development, markaların dijitalde daha güçlü görünmesi için tasarım ve
-                  geliştirmeyi birlikte ele alır. Amacımız sadece bir site yayınlamak değil; güven
-                  veren, hızlı çalışan ve müşteriye profesyonel hissettiren bir deneyim
-                  oluşturmaktır.
+                  r2 development, markaların dijitalde daha güçlü görünmesi için tasarım ve geliştirmeyi birlikte ele alır. Amacımız sadece bir site yayınlamak değil; güven veren, hızlı çalışan ve müşteriye profesyonel hissettiren bir deneyim oluşturmaktır.
                 </p>
               </div>
 
               <div className="stats-grid">
                 {stats.map((stat) => (
-                  <motion.div
-                    key={stat.label}
-                    whileHover={{ y: -5, scale: 1.01 }}
-                    transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-                    className="stat-card"
-                  >
+                  <motion.div key={stat.label} whileHover={{ y: -5, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }} className="stat-card">
                     <div className="stat-value">{stat.value}</div>
                     <div className="stat-label">{stat.label}</div>
                   </motion.div>
@@ -554,12 +440,7 @@ export default function App() {
 
             <div className="quality-grid">
               {qualityPoints.map((item) => (
-                <motion.div
-                  key={item.title}
-                  whileHover={{ y: -5, scale: 1.01 }}
-                  transition={{ type: 'spring', stiffness: 220, damping: 18 }}
-                  className="quality-card"
-                >
+                <motion.div key={item.title} whileHover={{ y: -5, scale: 1.01 }} transition={{ type: 'spring', stiffness: 220, damping: 18 }} className="quality-card">
                   <div className="quality-icon-wrap">
                     <Layers3 className="icon-md icon-primary" />
                   </div>
@@ -572,115 +453,57 @@ export default function App() {
         </section>
 
         <section id="contact" className="section container contact-section">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.18 }}
-            transition={{ duration: 0.7 }}
-            className="contact-shell"
-          >
-            <motion.div
-              className="contact-top-line"
-              animate={{ opacity: [0.35, 1, 0.35] }}
-              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <motion.div
-              className="contact-blob"
-              animate={{ scale: [1, 1.16, 1], opacity: [0.35, 0.75, 0.35] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            />
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.18 }} transition={{ duration: 0.7 }} className="contact-shell">
+            <motion.div className="contact-top-line" animate={{ opacity: [0.35, 1, 0.35] }} transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }} />
+            <motion.div className="contact-blob" animate={{ scale: [1, 1.16, 1], opacity: [0.35, 0.75, 0.35] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
 
             <div className="contact-grid">
-              {submitState.succeeded ? (
-                <div className="contact-form-card">
-                  <div className="contact-head">
-                    <p className="contact-kicker">r2 development</p>
-                    <h2>Mesajın Gönderildi</h2>
-                    <p>Talebin bize ulaştı. En kısa sürede sana dönüş yapacağız.</p>
-                  </div>
+              <form action="https://formspree.io/f/xjgjyzgj" method="POST" style={formCardStyle}>
+                <input type="hidden" name="_subject" value="r2 development iletişim formu" />
+                <input type="hidden" name="_captcha" value="false" />
 
-                  <div className="success-card-actions">
-                    <ButtonLink href="#home" onClick={scrollToSection('home')}>
-                      Ana Sayfaya Dön
-                    </ButtonLink>
-                  </div>
+                <div className="contact-head">
+                  <p className="contact-kicker">r2 development</p>
+                  <h2>İletişime Geç</h2>
+                  <p>
+                    Projeni, istediğin sistemi veya fikrini gönder; sana en uygun dijital çözümü birlikte planlayalım.
+                  </p>
                 </div>
-              ) : (
-                <form onSubmit={handleContactSubmit} className="contact-form-card">
-                  <div className="contact-head">
-                    <p className="contact-kicker">r2 development</p>
-                    <h2>İletişime Geç</h2>
-                    <p>
-                      Projeni, istediğin sistemi veya fikrini gönder; sana en uygun dijital çözümü
-                      birlikte planlayalım.
-                    </p>
-                  </div>
 
-                  <div className="form-two-col">
-                    <label>
-                      <span>Adınız</span>
-                      <input type="text" name="name" required placeholder="Adınızı yazın" />
-                    </label>
-
-                    <label>
-                      <span>E-posta</span>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="E-posta adresiniz"
-                      />
-                    </label>
-                  </div>
-
-                  <label className="textarea-label">
-                    <span>Mesajınız</span>
-                    <textarea
-                      rows={5}
-                      name="message"
-                      required
-                      placeholder="Projenizden kısaca bahsedin"
-                    />
+                <div className="form-two-col">
+                  <label style={labelStyle}>
+                    <span style={labelTextStyle}>Adınız</span>
+                    <input type="text" name="name" required placeholder="Adınızı yazın" style={inputStyle} />
                   </label>
 
-                  <motion.button
-                    type="submit"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="submit-button"
-                    disabled={submitState.submitting}
-                  >
-                    {submitState.submitting ? 'GÖNDERİLİYOR' : 'GÖNDER'}
-                    <ArrowRight className="h-4 w-4" />
-                  </motion.button>
+                  <label style={labelStyle}>
+                    <span style={labelTextStyle}>E-posta</span>
+                    <input type="email" name="email" required placeholder="E-posta adresiniz" style={inputStyle} />
+                  </label>
+                </div>
 
-                  {submitState.error && (
-                    <div className="form-status">{submitState.error}</div>
-                  )}
-                </form>
-              )}
+                <label className="textarea-label" style={{ ...labelStyle, marginTop: '2rem' }}>
+                  <span style={labelTextStyle}>Mesajınız</span>
+                  <textarea rows={5} name="message" required placeholder="Projenizden kısaca bahsedin" style={textareaStyle} />
+                </label>
+
+                <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} style={submitButtonStyle}>
+                  GÖNDER
+                  <ArrowRight className="h-4 w-4" />
+                </motion.button>
+              </form>
 
               <div className="social-card">
                 <div>
                   <p className="contact-kicker social-kicker">Sosyal iletişim</p>
                   <h3>Hızlı ulaşım için buradayız.</h3>
                   <p className="social-description">
-                    Teklif almak, proje detaylarını konuşmak veya örnek çalışma istemek için
-                    Instagram ya da WhatsApp üzerinden ulaşabilirsin.
+                    Teklif almak, proje detaylarını konuşmak veya örnek çalışma istemek için Instagram ya da WhatsApp üzerinden ulaşabilirsin.
                   </p>
                 </div>
 
                 <div className="social-links">
-                  <motion.a
-                    href={INSTAGRAM_URL}
-                    onClick={openExternalLink(INSTAGRAM_URL)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ x: 4, scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="social-link"
-                  >
+                  <motion.a href={INSTAGRAM_URL} onClick={openExternalLink(INSTAGRAM_URL)} target="_blank" rel="noopener noreferrer" whileHover={{ x: 4, scale: 1.01 }} whileTap={{ scale: 0.98 }} className="social-link">
                     <span className="social-link-left">
                       <span className="social-icon-box">
                         <InstagramIcon className="icon-md icon-primary-light" />
@@ -690,15 +513,7 @@ export default function App() {
                     <ArrowRight className="icon-sm social-arrow" />
                   </motion.a>
 
-                  <motion.a
-                    href={WHATSAPP_URL}
-                    onClick={openExternalLink(WHATSAPP_URL)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ x: 4, scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="social-link"
-                  >
+                  <motion.a href={WHATSAPP_URL} onClick={openExternalLink(WHATSAPP_URL)} target="_blank" rel="noopener noreferrer" whileHover={{ x: 4, scale: 1.01 }} whileTap={{ scale: 0.98 }} className="social-link">
                     <span className="social-link-left">
                       <span className="social-icon-box">
                         <WhatsAppIcon className="icon-md icon-primary-light" />
